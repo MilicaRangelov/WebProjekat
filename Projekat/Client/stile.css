@@ -1,0 +1,131 @@
+
+body{
+
+    background-image: url("gallery.jpg");
+    /*background-position: center;*/
+    background-position-y: 20%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: blanchedalmond;
+    
+}
+table, tr, td, th{
+
+    border: 1px solid black;
+
+}
+
+table {
+
+    border-collapse:collapse ;
+}
+
+
+.GlavnaForma{
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding-top: 250px;
+
+}
+
+.div1{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-color: #f7f7f7;
+    width: 100%;
+}
+
+.headerGlavne{
+
+    color: rgba(54, 38, 2, 0.959);
+    background-color: #f7f7f7;
+    font-family: "Lucida Console", "Courier New", monospace;
+    size: 220%;
+}
+
+.View{
+
+
+    background-color: #f7f7f7; 
+    border: none;
+    color: rgb(20, 11, 11);
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-family:"Lucida Console", "Courier New", monospace ;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.View:hover{
+    background-color: #8f7919;
+    color: white;
+}
+
+.Glavni2{
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+
+
+}
+
+.Izlozbe, .Karte, .Umetnici{
+
+    
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    background-color: #f7f7f7;
+    width: 30%;
+    height: 100%;
+
+
+}
+
+.KonForma{
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.KonPrikaz{
+    margin-left: 100px;
+}
+
+.KonIzlozba{
+    margin-left: 300px;
+}
+
+.GlavnaKarte{
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.KonKarte{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
