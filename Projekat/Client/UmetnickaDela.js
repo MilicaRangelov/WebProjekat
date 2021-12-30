@@ -1,6 +1,6 @@
 export class UmetnickaDela{
 
-    constructor(naslov,godina,tipDela){
+    constructor(naslov,godina,tipDela,){
         this.naslov = naslov;
         this.godina = godina;
         this.tipDela = tipDela;

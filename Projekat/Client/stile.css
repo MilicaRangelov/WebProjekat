@@ -1,6 +1,9 @@
 
 body{
-
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: baseline;
     background-image: url("gallery.jpg");
     /*background-position: center;*/
     background-position-y: 20%;
@@ -15,12 +18,64 @@ table, tr, td, th{
 
 }
 
-table {
-
-    border-collapse:collapse ;
+th,
+td {
+	padding: 15px;
+	background-color: rgba(255,255,255,0.2);
+	color: #fff;
 }
 
 
+th {
+	background-color: #aca460;
+}
+tr :hover {
+        background-color: rgba(151, 150, 94, 0.884);
+}
+td {
+    position: relative;
+}
+td:hover:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -9999px;
+    bottom: -9999px;
+    background-color: rgba(255,255,255,0.2);
+    z-index: -1;
+}
+
+table {
+
+    width: 800px;
+	border-collapse: collapse;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+select {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 3px;
+    color: rgba(54, 38, 2, 0.959);
+    background-color: #f7f7f7;
+    font-family: "Lucida Console", "Courier New", monospace;
+    size: 300%;
+   
+}
+.select {
+    position: relative;
+    display: block;
+    width: 15em;
+    height: 2em;
+    line-height: 3;
+    overflow: hidden;
+    border-radius: .25em;
+    padding-bottom: 10px;
+}
 .GlavnaForma{
 
     display: flex;
@@ -42,13 +97,24 @@ table {
     width: 100%;
 }
 
-.headerGlavne{
+.headerGlavne, .pPocetak, .pKraj, .pK, .pIme, .pPrezime, .pIzlozbaNaziv, .pBroj, .pUmetnicko, .pDrzava  {
 
     color: rgba(54, 38, 2, 0.959);
     background-color: #f7f7f7;
     font-family: "Lucida Console", "Courier New", monospace;
-    size: 220%;
+    size: 500%;
+   
 }
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
 .View{
 
@@ -72,24 +138,28 @@ table {
     color: white;
 }
 
-.Glavni2{
+.Glavni2, .Glavni3{
 
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
-    align-content: center;
+    align-items: center;
+    background-color: #d6c782;
+  
 
 
 }
 
+
 .Izlozbe, .Karte, .Umetnici{
 
     
+
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    justify-content: space-around;
+    align-items: center;
     align-content: center;
     background-color: #f7f7f7;
     width: 30%;
@@ -98,20 +168,14 @@ table {
 
 }
 
-.KonForma{
+.KonForma, .FormaUmetnika, .PrikazUmetnika, .PodaciUmetnika{
 
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
 }
 
-.KonPrikaz{
-    margin-left: 100px;
-}
 
-.KonIzlozba{
-    margin-left: 300px;
-}
 
 .GlavnaKarte{
 
@@ -128,4 +192,24 @@ table {
     justify-content: space-between;
 }
 
+
+.Back{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: transparent;
+    font-size: small;
+    font-family: "Lucida Console", "Courier New", monospace ;
+    border: none;
+}
+
+.Next{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    background-color: transparent;
+    font-size: small;
+    font-family: "Lucida Console", "Courier New", monospace ;
+    border: none;
+}
 

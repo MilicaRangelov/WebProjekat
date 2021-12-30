@@ -5949,11 +5949,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Documents\\III godina\\V semestar\\WebProgramiranje\\Projekat\\Projekat.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\WebProjekat\\Projekat\\Projekat.csproj",
       "projectName": "Projekat",
-      "projectPath": "C:\\Users\\User\\Documents\\III godina\\V semestar\\WebProgramiranje\\Projekat\\Projekat.csproj",
+      "projectPath": "C:\\Users\\User\\Desktop\\WebProjekat\\Projekat\\Projekat.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Documents\\III godina\\V semestar\\WebProgramiranje\\Projekat\\obj\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\WebProjekat\\Projekat\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

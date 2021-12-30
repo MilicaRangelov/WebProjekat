@@ -33,6 +33,34 @@ namespace Projekat.Controllers
 
         }).ToListAsync());
 
+        [Route("Umetnik/{idUmetnika}")]
+        [HttpGet]
+
+        public async Task<ActionResult> Izlozba(int idUmetnika){
+
+             if(idUmetnika < 0){
+                 return BadRequest("Pogresan id izlozbe");
+            }
+
+            try{
+
+                return Ok( await Context.Umetnici.Where(q => q.ID == idUmetnika)
+                .Select ( p => new{
+                    id = p.ID,
+                    ime = p.Ime,
+                    umetnickoIme = p.UmetnickoIme,
+                    prezime = p.Prezime,
+                    drzavaRodj = p.DrzavaRodjenja
+                
+                }).ToListAsync());
+
+            }
+            catch(Exception ex){
+                return BadRequest(ex.Message);
+            }
+
+        }
+
 
         [Route("DodajUmetnika/{ime}/{umetnickoIme}/{prezime}/{drzavaRodjenja}")]
         [HttpPost]

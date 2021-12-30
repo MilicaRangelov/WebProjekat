@@ -1,9 +1,10 @@
 import { Galerija } from "./Galerija.js";
 import { Karte } from "./Karte.js";
 import { Izlozbe } from "./Izlozbe.js";
+import { Umetnici } from "./Umetnici.js";
 
 var listaIzlozbi = [];
-var listaDela = [];
+var listaUmetnika = [];
 
 fetch("https://localhost:5001/Izlozba/PrikaziIzlozbe")
 .then(p =>{
@@ -17,12 +18,32 @@ fetch("https://localhost:5001/Izlozba/PrikaziIzlozbe")
             
         });
 
-        console.log(listaIzlozbi);
-
-        var galerija = new Galerija(listaIzlozbi,listaDela);
-        galerija.crtaj(document.body);
+        fetch("https://localhost:5001/Umetnik/PrikaziUmetnike")
+        .then(p =>{
+        
+            p.json().then(umetnici =>{
+        
+                umetnici.forEach(umetnik => {
+        
+                    var u = new Umetnici(umetnik.id, umetnik.ime, umetnik.umetnickoIme, umetnik.prezime, umetnik.drzavaRodjenja);
+                    listaUmetnika.push(u);
+                    
+                });
+        
+                console.log(listaIzlozbi);
+        
+                var galerija = new Galerija(listaIzlozbi,listaUmetnika);
+                galerija.crtaj(document.body);
+        
+            })
+        
+        })
+        
 
     })
 
 })
+
+
+
 

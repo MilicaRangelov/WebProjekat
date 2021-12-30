@@ -38,10 +38,10 @@ namespace Projekat.Controllers
         }).ToListAsync());
 
 
-        [Route("DelaUmetnika")]
+        [Route("DelaUmetnika/{idUmetnika}")]
         [HttpGet]
 
-        public async Task<ActionResult> DelaUmetnika([FromQuery] int idUmetnika)
+        public async Task<ActionResult> DelaUmetnika(int idUmetnika)
         {
             if(idUmetnika <= 0)
                 return BadRequest("Ne postoji umetnik sa zadatim id-jem");
