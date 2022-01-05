@@ -1,0 +1,233 @@
+
+body{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: stretch;
+    align-self: stretch;
+    background-image: url("gallery.jpg");
+    background-position-y: 20%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: blanchedalmond;
+    
+}
+table, tr, td, th{
+
+    border: 1px solid black;
+
+}
+
+th,
+td {
+	padding: 15px;
+	background-color: rgba(255,255,255,0.2);
+	color: #fff;
+}
+
+
+th {
+	background-color: #aca460;
+}
+tr :hover {
+        background-color: rgba(151, 150, 94, 0.884);
+}
+td {
+    position: relative;
+}
+td:hover:before{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -9999px;
+    bottom: -9999px;
+    background-color: rgba(255,255,255,0.2);
+    z-index: -1;
+}
+
+table {
+
+    width: 800px;
+	border-collapse: collapse;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+select {
+   
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 3px;
+    color: rgba(54, 38, 2, 0.959);
+    background-color: #f7f7f7;
+    font-family: "Lucida Console", "Courier New", monospace;
+    size: 300%;
+   
+}
+.select {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: center;
+    position: relative;
+    display: block;
+    width: 15em;
+    height: 2em;
+    line-height: 3;
+    overflow: hidden;
+    border-radius: .25em;
+    padding-bottom: 10px;
+}
+.GlavnaForma{
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding-top: 250px;
+
+}
+
+.div1{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-color: #f7f7f7;
+    width: 100%;
+}
+
+.headerGlavne, .pPocetak, .pKraj, .pK, .pIme, .pPrezime, .pIzlozbaNaziv, .pBroj, .pUmetnicko, .pDrzava  {
+
+    color: rgba(54, 38, 2, 0.959);
+    background-color: #f7f7f7;
+    font-family: "Lucida Console", "Courier New", monospace;
+    size: 500%;
+   
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+.View{
+
+    display: flex;
+    flex-wrap: wrap;
+    align-self: stretch;
+    background-color: #f7f7f7; 
+    border: none;
+    color: rgb(20, 11, 11);
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-family:"Lucida Console", "Courier New", monospace ;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.View:hover{
+    background-color: #8f7919;
+    color: white;
+}
+
+.Glavni2, .Glavni3{
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-self: stretch;
+    background-color: transparent;
+    height: 500px;
+    margin-top: 30px;
+
+
+}
+
+
+.Izlozbe, .Karte, .Umetnici{
+
+    
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    align-self: center;
+    background-color:  rgba(230, 218, 140, 0.5);
+    width: 30%;
+    height: 100%;
+
+
+}
+
+.KonForma, .FormaUmetnika, .PrikazUmetnika, .PodaciUmetnika{
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color:  rgba(230, 218, 140, 0.5);
+}
+
+
+
+.GlavnaKarte{
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.KonKarte, .KonPrikazK{
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    background-color:  rgba(230, 218, 140, 0.5);
+}
+
+
+.Back{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: transparent;
+    font-size: small;
+    font-family: "Lucida Console", "Courier New", monospace ;
+    border: none;
+    background-color:  rgba(230, 218, 140, 0.5);
+}
+
+.Next{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    background-color: transparent;
+    font-size: small;
+    font-family: "Lucida Console", "Courier New", monospace ;
+    border: none;
+    background-color:  rgba(230, 218, 140, 0.5);
+}
+
+.KonPrikaz, .PodIzlozbe{
+    background-color:  rgba(230, 218, 140, 0.7);
+}
