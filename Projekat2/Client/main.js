@@ -1,9 +1,23 @@
-import { Galerija } from "./Galerija.js";
+import { Crtaj } from "./Crtaj.js";
+import {Galerija} from "./Galerija.js";
 
-let listaIzlozbi = [];
-let listaUmetnika = [];
-let idGalerije;
-let nazivG;
+let listaGalerija = [];
 
-var galerija = new Galerija(idGalerije,nazivG,listaIzlozbi,listaUmetnika);
-galerija.crtaj(document.body);
+fetch("https://localhost:5001/Galerija/GalerijaPrikaz")
+.then(p=>{
+
+    p.json().then(galerije =>{
+
+        galerije.forEach(galerija => {
+
+            var g = new Galerija(galerija.id, galerija.naziv);
+            listaGalerija.push(g);
+            
+        });
+
+        var c = new Crtaj(listaGalerija);
+        c.crtaj(document.body);
+    })
+
+})
+

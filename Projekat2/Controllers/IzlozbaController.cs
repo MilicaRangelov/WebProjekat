@@ -22,7 +22,7 @@ namespace Projekat.Controllers
             Context = context;
         }
 
-        [Route("PrikaziIzlozbeGalerije/idGalerije")]
+        [Route("PrikaziIzlozbeGalerije/{idGalerije}")]
         [HttpGet]
 
         public async Task<ActionResult> PrikaziIzlozbeGalerije(int idGalerije){
@@ -52,6 +52,75 @@ namespace Projekat.Controllers
             }
 
         }
+
+        [Route("PodaciIzlozbe/{idIzlozbe}")]
+        [HttpGet]
+
+        public async Task<ActionResult> PodaciIzlozbe(int idIzlozbe){
+
+            if(idIzlozbe < 0){
+
+                return BadRequest("Pogresan id");
+            }
+
+            try{
+
+                return Ok( await Context.Izlozbe.Where(q => q.ID == idIzlozbe)
+                .Select ( p => new{
+                    id = p.ID,
+                    naslov = p.NazivIzlozbe,
+                    datumPocetka = p.DatumPocetka.ToShortDateString(),
+                    datumKraja = p.DatumKraja.ToShortDateString(),
+                    BrojKarata = Context.Karte.Where(k => k.Izlozba.ID == idIzlozbe).ToList().Count
+                
+                }).ToListAsync());
+
+
+            }catch(Exception ex){
+
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [Route("IzlozenaDela/{idIzlozbe}")]
+        [HttpGet]
+
+        public async Task<ActionResult> IzlozenaDela(int idIzlozbe){
+
+            if(idIzlozbe < 0){
+
+                return BadRequest("Id izlozbe je manji od 0");
+            }
+
+            try{
+
+                var dela = await Context.DelaIzlozbe
+                        .Include(p=> p.UmetnickoDelo)
+                        .Include(p=>p.Izlozba)
+                        .Where( p => p.Izlozba.ID == idIzlozbe).ToListAsync();
+
+                return Ok(
+
+                    dela.Select(
+                        p=> new{
+                            Naslov = p.UmetnickoDelo.Naslov,
+                            Kreirano = p.UmetnickoDelo.Godina,
+                            Tip = p.UmetnickoDelo.TipDela,
+                            Izlozba = p.Izlozba.NazivIzlozbe
+                           
+                        }).ToList()
+                );
+
+            }
+            catch(Exception ex){
+
+                return BadRequest(ex.Message);
+            }
+
+
+        }
+
 
         [Route("DodajIzlozbe/{idGalerije}/{naziIzlozbe}/{datumPocetka}/{datumKraja}")]
         [HttpPost]
