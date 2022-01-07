@@ -1,6 +1,9 @@
 import { Izlozba } from "./Izlozba.js";
 import { UmetnickaDela } from "./UmetnickaDela.js";
 import { Karte } from "./Karte.js";
+import { Umetnici } from "./Umetnici.js";
+import { Crtaj } from "./Crtaj.js";
+
 
 export class Galerija{
 
@@ -8,9 +11,7 @@ export class Galerija{
 
         this.id = id;
         this.naziv=naziv;
-        this.listaIzlozba = [];
-        this.listaUmetnika = [];
-        this.listaDela = [];
+        this.listaGalerija = [];
         this.kontejner = null;
 
     }
@@ -93,9 +94,35 @@ export class Galerija{
         konPrikaz.appendChild(btnUmetnici);
         btnUmetnici.onclick = (ev)=> this.PretraziUmetnike(host);
 
-
+        this.crtajBack(this.kontejner);
+        let btn = document.querySelector(".Back");
+        btn.onclick= (ev) =>this.prikaziSveGalerije(host);
+        btn.innerHTML = "Go Back";
 
     }
+
+    prikaziSveGalerije(host){
+
+            while(this.listaGalerija.length > 0)
+                this.listaGalerija.pop();
+            fetch("https://localhost:5001/Galerija/GalerijaPrikaz")
+            .then(p=>{
+
+            p.json().then(galerije =>{
+
+            galerije.forEach(galerija => {
+
+                var g = new Galerija(galerija.id, galerija.naziv);
+                this.listaGalerija.push(g);
+                
+            });
+
+            var c = new Crtaj(this.listaGalerija);
+            c.crtaj2(host);
+        })
+
+    })
+ }
 
     DostupneIzlozbe(host){
 
@@ -195,7 +222,7 @@ export class Galerija{
 
         this.crtajBack(this.kontejner);
         let btn = document.querySelector(".Back");
-        btn.onclick= (ev) => this.crtaj2(host);
+        btn.onclick= (ev) => this.crtaj(host);
         btn.innerHTML = "Go Back";
 
         let div = document.createElement("div");
@@ -233,7 +260,7 @@ export class Galerija{
         let se = document.createElement("select");
         divSe.appendChild(se);
 
-       //funkcija;
+        this.umetniciGalerije(se);
 
         let btnPrikazi = document.createElement("button");
         btnPrikazi.onclick = (ev) => this.nadjiDelaUmetnika();
@@ -495,16 +522,10 @@ export class Galerija{
 
             p.json().then( izlozbe =>{
 
-                if(this.listaIzlozba.length > 0){
-                    while(this.listaIzlozba.length != 0)
-                        this.listaIzlozba.pop();
-                }
-
                 izlozbe.forEach( izlozba => {
 
                     let op = document.createElement("option");
                     let izl = new Izlozba(izlozba.id, izlozba.naziv, izlozba.datumPoc, izlozba.datKraja, izlozba.brojKarata);
-                    this.listaIzlozba.push(izlozba);
                     op.innerHTML = izl.naziv;
                     op.value = izl.id;
                     host.appendChild(op);
@@ -675,6 +696,96 @@ export class Galerija{
         })
     }
 
+
+    umetniciGalerije(host){
+
+        fetch("https://localhost:5001/Galerija/PrikaziUmetnike/"+ this.id, {
+            method: "GET"
+        })
+        .then(p=>{
+
+            if(p.ok){
+
+                p.json().then(umetnici => {
+
+                    umetnici.forEach(umetnik => {
+
+                        var u = new Umetnici(umetnik.id,umetnik.ime, umetnik.umetnickoIme, umetnik.prezime, umetnik.drzavaRodjenja);
+                        let op = document.createElement("option");
+                        op.innerHTML = u.ime;
+                        op.value = u.id;
+                        host.appendChild(op);
+                    })
+                })
+            }
+        })
+    }
+
+    nadjiDelaUmetnika(){
+
+        let optionEl = this.kontejner.querySelector("select");
+        var umetnikId = optionEl.options[optionEl.selectedIndex].value;
+
+
+        this.ucitajDelaUmetnika(umetnikId);
+        this.prikaziPodatkeUmetnika(umetnikId);
+
+    }
+
+    ucitajDelaUmetnika(umetnikId){
+
+        fetch("https://localhost:5001/UmetnickoDelo/DelaUmetnika/"+ umetnikId + "/"+this.id, {
+            method : "GET"
+        })
+        .then(p=>{
+
+            if(p.ok){
+
+                var tabela = document.querySelector(".Tabela");
+                    
+                    if(i = tabela.rows.length != 0){
+                        for(var i = tabela.rows.length-1; i >= 0; i--)
+                        {
+                            tabela.deleteRow(i);
+                        }
+                    }
+                
+                p.json().then(dela => {
+
+                    dela.forEach(delo => {
+
+                        var d = new UmetnickaDela(delo.naslov, delo.godina, delo.tipDela);
+                        d.crtaj(tabela);
+                    })
+                })    
+
+
+            }
+        })
+
+    }
+
+    prikaziPodatkeUmetnika(umetnikId){
+
+        fetch("https://localhost:5001/Umetnik/Umetnik/" + umetnikId , {
+            method: "GET"
+        })
+        .then(p=> {
+
+            if(p.ok){
+
+                p.json().then(umetnici => {
+                    
+                    umetnici.forEach(umetnik => {
+                        
+                        var um = new Umetnici(umetnik.id, umetnik.ime, umetnik.umetnickoIme, umetnik.prezime, umetnik.drzavaRodj);
+                        um.crtaj();
+                    })
+                })
+            }
+        })
+
+    }
 
 
 }

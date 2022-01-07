@@ -21,6 +21,9 @@ export class Crtaj{
         }
     }
 
+    povratak(host){
+        this.crtaj2(host);
+    }
 
     crtaj(host){
 

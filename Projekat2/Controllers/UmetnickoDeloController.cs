@@ -38,17 +38,18 @@ namespace Projekat.Controllers
         }).ToListAsync());
 
 
-        [Route("DelaUmetnika/{idUmetnika}")]
+        [Route("DelaUmetnika/{idUmetnika}/{idGalerije}")]
         [HttpGet]
 
-        public async Task<ActionResult> DelaUmetnika(int idUmetnika)
+        public async Task<ActionResult> DelaUmetnika(int idUmetnika,int idGalerije)
         {
             if(idUmetnika <= 0)
                 return BadRequest("Ne postoji umetnik sa zadatim id-jem");
 
             try
             {
-                return Ok( await Context.UmetnickaDela.Where(q => q.Umetnik.ID == idUmetnika)
+                var galerija = await Context.GalerijaUmetnici.Where(p=> p.Umetnik.ID == idUmetnika && p.Galerija.ID == idGalerije).FirstOrDefaultAsync();
+                return Ok( await Context.UmetnickaDela.Where(q => q.Umetnik.ID == idUmetnika && q.Galerija.ID == idGalerije)
                 .Select ( p => new{
 
                     id = p.ID,
