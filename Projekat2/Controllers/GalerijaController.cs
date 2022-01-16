@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Models;
 
 namespace Projekat2.Controllers
@@ -20,6 +20,7 @@ namespace Projekat2.Controllers
                 Context = context;
         }
 
+        [EnableCors("CORS")]
         [Route("Galerija/{id}")]
         [HttpGet]
 
@@ -48,6 +49,7 @@ namespace Projekat2.Controllers
           
         }
 
+        [EnableCors("CORS")]
         [Route("GalerijaPrikaz")]
         [HttpGet]
 
@@ -72,6 +74,7 @@ namespace Projekat2.Controllers
           
         }
 
+        [EnableCors("CORS")]
         [Route("DodajGaleriju/{naziv}")]
         [HttpPost]
 
@@ -98,7 +101,7 @@ namespace Projekat2.Controllers
           
         }
 
-
+        [EnableCors("CORS")]
         [Route("ObrisiGaleriju/{id}")]
         [HttpDelete]
 
@@ -125,6 +128,7 @@ namespace Projekat2.Controllers
           
         }
 
+        [EnableCors("CORS")]
         [Route("PrikaziUmetnike/{id}")]
         [HttpGet]
 
@@ -166,6 +170,7 @@ namespace Projekat2.Controllers
         }
 
 
+        [EnableCors("CORS")]
         [Route("PrikaziDela/{id}")]
         [HttpGet]
 

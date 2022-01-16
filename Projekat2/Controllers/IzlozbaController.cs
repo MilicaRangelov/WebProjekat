@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Models;
@@ -22,6 +23,7 @@ namespace Projekat.Controllers
             Context = context;
         }
 
+        [EnableCors("CORS")]
         [Route("PrikaziIzlozbeGalerije/{idGalerije}")]
         [HttpGet]
 
@@ -53,6 +55,7 @@ namespace Projekat.Controllers
 
         }
 
+        [EnableCors("CORS")]
         [Route("PodaciIzlozbe/{idIzlozbe}")]
         [HttpGet]
 
@@ -83,6 +86,7 @@ namespace Projekat.Controllers
 
         }
 
+        [EnableCors("CORS")]
         [Route("IzlozenaDela/{idIzlozbe}")]
         [HttpGet]
 
@@ -121,7 +125,7 @@ namespace Projekat.Controllers
 
         }
 
-
+        [EnableCors("CORS")]
         [Route("DodajIzlozbe/{idGalerije}/{naziIzlozbe}/{datumPocetka}/{datumKraja}")]
         [HttpPost]
 
@@ -154,6 +158,7 @@ namespace Projekat.Controllers
             }
         }
 
+        [EnableCors("CORS")]
         [Route("ObrisiIzlozbu/{id}")]
         [HttpDelete]
         public async Task<ActionResult> ObrisiIzlozbu(int id)
@@ -175,7 +180,8 @@ namespace Projekat.Controllers
             }
         }
 
-         [Route("DodajIzlozenaDela/{idDela}/{idIzlozbe}")]
+        [EnableCors("CORS")]
+        [Route("DodajIzlozenaDela/{idDela}/{idIzlozbe}")]
         [HttpPost]
         public async Task<ActionResult> DodajIzlozenDela(int idDela, int idIzlozbe)
         {

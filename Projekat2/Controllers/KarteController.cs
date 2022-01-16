@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Cors;
 using Models;
 
 namespace Projekat.Controllers
@@ -21,6 +22,7 @@ namespace Projekat.Controllers
             Context = context;
         }
 
+        [EnableCors("CORS")]
         [Route("PrikaziKarte")]
         [HttpGet]
         public async Task<ActionResult> PrikaziKarte() => 
@@ -35,7 +37,7 @@ namespace Projekat.Controllers
 
         }).ToListAsync());
 
-
+        [EnableCors("CORS")]
         [Route("KarteJedeneIzlozbe")]
         [HttpGet]
 
@@ -65,6 +67,7 @@ namespace Projekat.Controllers
 
         }
 
+        [EnableCors("CORS")]
         [Route("KartaPosetioca/{imePosetioca}/{prezimePosetioca}/{idIzlozbe}")]
         [HttpGet]
 
@@ -106,6 +109,7 @@ namespace Projekat.Controllers
 
         }
 
+        [EnableCors("CORS")]
         [Route("DodajKartu/{imePosetioca}/{prezimePosetioca}/{idIzlozbe}")]
         [HttpPost]
 
@@ -162,7 +166,7 @@ namespace Projekat.Controllers
             }
         }
 
-
+        [EnableCors("CORS")]
         [Route("ObrisiKartu/{id}")]
         [HttpDelete]
         public async Task<ActionResult> ObrisiKartu(int id)
@@ -186,21 +190,32 @@ namespace Projekat.Controllers
             }
         }
 
-        [Route("ObrisiKartuPosetioca/{ime}/{prezime}/{idIzlozbe}")]
+        [EnableCors("CORS")]
+        [Route("ObrisiKartuPosetioca/{ime}/{prezime}/{idIzlozbe}/{broj}")]
         [HttpDelete]
-        public async Task<ActionResult> ObrisiKartuPosetioca(string ime, string prezime, int idIzlozbe)
+        public async Task<ActionResult> ObrisiKartuPosetioca(string ime, string prezime, int idIzlozbe,int broj)
         {
             if(idIzlozbe <= 0)
-                return BadRequest("Pogresan id.Mora biti veci od 0");
+                return BadRequest("Broj mora biti veci od 0");
+
+            if(string.IsNullOrEmpty(ime) || string.IsNullOrEmpty(prezime))
+                return BadRequest("Prazan string");
+
+
             
             try
             {
                 var izlozba = await Context.Izlozbe.Where(p=>p.ID == idIzlozbe).FirstOrDefaultAsync();
                 var karta = await Context.Karte.Where(p=> p.Izlozba.ID == idIzlozbe && p.ImePosetioca.Equals(ime) 
-                 && p.PrezimePosetioca.Equals(prezime)).FirstOrDefaultAsync();
-                
-                Context.Karte.Remove(karta);
-                await Context.SaveChangesAsync();
+                 && p.PrezimePosetioca.Equals(prezime)).ToListAsync();
+
+                int i =0;
+                while(i < broj){
+                    Context.Karte.Remove(karta[i]);
+                    await Context.SaveChangesAsync();
+                    i++;
+                }
+          
                 var karte = await Context.Karte.Where(p=> p.Izlozba.ID == idIzlozbe && p.ImePosetioca.Equals(ime) 
                  && p.PrezimePosetioca.Equals(prezime)).ToListAsync();
                 
@@ -221,15 +236,13 @@ namespace Projekat.Controllers
             }
         }
 
-        [Route("IzmeniKartu/{id}/{imePosetioca}/{prezimePosetioca}/{idIzlozbe}")]
+        [EnableCors("CORS")]
+        [Route("IzmeniKartu/{imePosetioca}/{prezimePosetioca}/{idStareIzlozbe}/{idNoveIzlozbe}/{broj}")]
         [HttpPut]
 
-        public async Task<ActionResult> IzmeniKartu(int id, string imePosetica, string prezimePosetioca, int idIzlozbe)
+        public async Task<ActionResult> IzmeniKartu(string imePosetioca, string prezimePosetioca, int idStareIzlozbe,int idNoveIzlozbe, int broj)
         {
-            if(id <= 0)
-                return BadRequest("Pogresna vrednost id-ja");
-
-            if(string.IsNullOrWhiteSpace(imePosetica) || imePosetica.Length > 20)
+            if(string.IsNullOrWhiteSpace(imePosetioca) || imePosetioca.Length > 20)
             {
                 return BadRequest("Pogresnan ime posetioca");
             }
@@ -239,25 +252,42 @@ namespace Projekat.Controllers
                 return BadRequest("Pogresno prezime posetioca");
             }
 
-            if(idIzlozbe <= 0)
+            if(idStareIzlozbe <= 0 || idNoveIzlozbe < 0)
             {
                 return BadRequest("Pogresna id izlozbe");
             }
             try
             {
-                var karta = await Context.Karte.FindAsync(id);
-                var izlozba = await Context.Izlozbe.Where(p => p.ID == idIzlozbe).FirstOrDefaultAsync();
-                if(karta != null && izlozba != null)
+                var karte = await Context.Karte.Where(p=> p.ImePosetioca.Equals(imePosetioca) && p.PrezimePosetioca.Equals(prezimePosetioca) && p.Izlozba.ID == idStareIzlozbe).ToListAsync();
+                var izlozba = await Context.Izlozbe.Where(p => p.ID == idNoveIzlozbe).FirstOrDefaultAsync();
+        
+                if(karte != null && izlozba != null )
                 {
-                   karta.ImePosetioca = imePosetica;
-                   karta.PrezimePosetioca = prezimePosetioca;
-                   karta.Izlozba = izlozba;
+                    int i = 0;
+                    while( i < broj){
+                        karte[i].ImePosetioca = imePosetioca;
+                        karte[i].PrezimePosetioca = prezimePosetioca;
+                        karte[i].Izlozba = izlozba;
+                        await Context.SaveChangesAsync();
+                        i++;
 
-                    await Context.SaveChangesAsync();
-                    return Ok("Uspesno je izmenjena karta");
+                    }
+
+                    var karte2 = await Context.Karte.Where(p=> p.ImePosetioca.Equals(imePosetioca) && p.PrezimePosetioca.Equals(prezimePosetioca) && p.Izlozba.ID == idNoveIzlozbe).ToListAsync();
+
+                    return Ok(
+                    karte2.Select(p=> new{
+                        Ime = p.ImePosetioca,
+                        Prezime = p.PrezimePosetioca,
+                        Izlozba = p.Izlozba.NazivIzlozbe,
+                        Broj = karte2.Count
+
+
+                    }).ToList()
+                );
                 }
+                return BadRequest("Neuspesno menjenje karata");
 
-                return BadRequest("Ne postoji karta sa trazenik id-jem");
             
             }
             catch(Exception e)

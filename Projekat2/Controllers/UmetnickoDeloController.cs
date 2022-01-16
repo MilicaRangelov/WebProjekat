@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Logging;
 using Models;
 
@@ -20,7 +21,8 @@ namespace Projekat.Controllers
         {
             Context = context;
         }
-
+        
+        [EnableCors("CORS")]
         [Route("PrikaziUmetnickaDela")]
         [HttpGet]
         public async Task<ActionResult> PrikaziUmetnickaDela() => 
@@ -37,7 +39,7 @@ namespace Projekat.Controllers
 
         }).ToListAsync());
 
-
+        [EnableCors("CORS")]
         [Route("DelaUmetnika/{idUmetnika}/{idGalerije}")]
         [HttpGet]
 
@@ -48,7 +50,6 @@ namespace Projekat.Controllers
 
             try
             {
-                var galerija = await Context.GalerijaUmetnici.Where(p=> p.Umetnik.ID == idUmetnika && p.Galerija.ID == idGalerije).FirstOrDefaultAsync();
                 return Ok( await Context.UmetnickaDela.Where(q => q.Umetnik.ID == idUmetnika && q.Galerija.ID == idGalerije)
                 .Select ( p => new{
 
@@ -68,6 +69,7 @@ namespace Projekat.Controllers
 
         }
 
+        [EnableCors("CORS")]
         [Route("DodajUmetnickoDelo/{naslov}/{godina}/{tipDela}/{idUmetnika}/{idGalerije}")]
         [HttpPost]
 
@@ -119,7 +121,7 @@ namespace Projekat.Controllers
             }
         }
 
-
+        [EnableCors("CORS")]
         [Route("ObrisiUmetnickoDelo/{id}")]
         [HttpDelete]
         public async Task<ActionResult> ObrisiUmetnickoDelo(int id)
@@ -142,6 +144,7 @@ namespace Projekat.Controllers
             }
         }
 
+        [EnableCors("CORS")]
         [Route("IzmeniUmenickoDelo/{id}/{naslov}/{tipDela}/{godina}/{idUmetnika}/{idGalerije}")]
         [HttpPut]
 

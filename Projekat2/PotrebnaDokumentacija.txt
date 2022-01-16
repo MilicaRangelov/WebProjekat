@@ -1,0 +1,187 @@
+//Galerije
+
+INSERT INTO Galerije (ID, Naziv)
+VALUES (1, "The Nationall Gallery");
+
+INSERT INTO Galerije (ID, Naziv)
+VALUES (1, "Gagosian Gallery");
+
+//Umetnici
+
+INSERT INTO Umetnici(ID, Ime,UmetnickoIme,Prezime,DrzavaRodjenja)
+VALUES (1, "Antonio","Canova","Canova","Italija");
+
+INSERT INTO Umetnici(ID, Ime,UmetnickoIme,Prezime,DrzavaRodjenja)
+VALUES (2, "Gian","Lorenzo","Bernini","Italija");
+
+INSERT INTO Umetnici(ID, Ime,UmetnickoIme,Prezime,DrzavaRodjenja)
+VALUES (3, "Jean","Ingres","August Dominique","Italija");
+
+INSERT INTO Umetnici(ID, Ime,UmetnickoIme,Prezime,DrzavaRodjenja)
+VALUES (4, "Leonardo","L","Da Vinci","Italija");
+
+INSERT INTO Umetnici(ID, Ime,UmetnickoIme,Prezime,DrzavaRodjenja)
+VALUES (6, "Pablo","Picasso","Ruiz","Spanija");
+
+INSERT INTO Umetnici(ID, Ime,UmetnickoIme,Prezime,DrzavaRodjenja)
+VALUES (7, "Vincenzo","VanGogh","Van Gogh","Holandija");
+
+INSERT INTO Umetnici(ID, Ime,UmetnickoIme,Prezime,DrzavaRodjenja)
+VALUES (8, "August","Pierre","Renoir","Francuska");
+
+INSERT INTO Umetnici(ID, Ime,UmetnickoIme,Prezime,DrzavaRodjenja)
+VALUES (9, "Michelangelo","Caravaggio","Merigie","Italija");
+
+
+//GalerijaUmetnici
+
+INSERT INTO GalerijaUmetnici(ID,UmetnikID,GalerijaID)
+VALUES (1, 1,1);
+
+INSERT INTO GalerijaUmetnici(ID,UmetnikID,GalerijaID)
+VALUES (2,2,1);
+
+INSERT INTO GalerijaUmetnici(ID,UmetnikID,GalerijaID)
+VALUES (3,3,1);
+
+INSERT INTO GalerijaUmetnici(ID,UmetnikID,GalerijaID)
+VALUES (4,4,1);
+
+INSERT INTO GalerijaUmetnici(ID,UmetnikID,GalerijaID)
+VALUES (5,6,2);
+
+INSERT INTO GalerijaUmetnici(ID,UmetnikID,GalerijaID)
+VALUES (6,7,2);
+
+INSERT INTO GalerijaUmetnici(ID,UmetnikID,GalerijaID)
+VALUES (7,8,2);
+
+INSERT INTO GalerijaUmetnici(ID,UmetnikID,GalerijaID)
+VALUES (8,9,2);
+
+
+//UmetnickaDela
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (1, "Cupid’s Kiss",1793,"statua",1,1);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (2, "Venus Italica",1819,"statua",1,1);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (3, "The tree graces",1753,"statua",1,1);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (4, "Theseus and the Minotaur",1781,"statua",1,1);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (5, "Sleeping Hermaphroditus",1620,"statua",2,1);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (6, "Apollo and Daphne",1625,"statua",2,1);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (7, "Grande Odalisque",1814,"slika",3,1);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (8, "The Mona Lisa",1503,"slika",4,1);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (9, "The Last Supper",1498,"slika",4,1);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (10, "The Old Guitarist",1904,"slika",6,2);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (11, "The Starry Night",1889,"slika",7,2);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (12, "Café Terrace at Night",1888,"slika",7,2);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (13, "Wild Poppies",1873,"slika",8,2);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (14, "The death of marat",1793,"slika",9,2);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (15, "Primavera",1479,"slika",9,2);
+
+INSERT INTO Umetnici(ID, Naslov,Godina,TipDela,GalerijaID,UmetnikID)
+VALUES (16, "Scream",1893,"slika",9,2);
+
+
+//Izlozbe
+
+INSERT INTO Izlozbe(ID, NazivIzlozbe,DatumPocetka,DatumKraja,GalerijaID)
+VALUES (1, "Impresionizam","4/4/2022","5/5/2022",1);
+
+INSERT INTO Izlozbe(ID, NazivIzlozbe,DatumPocetka,DatumKraja,GalerijaID)
+VALUES (2, "The Empty World","5/6/2022","5/16/2022",1);
+
+INSERT INTO Izlozbe(ID, NazivIzlozbe,DatumPocetka,DatumKraja,GalerijaID)
+VALUES (3, "Statue","5/30/2022","6/4/2022",1);
+
+INSERT INTO Izlozbe(ID, NazivIzlozbe,DatumPocetka,DatumKraja,GalerijaID)
+VALUES (4, "Slike","5/30/2022","6/4/2022",2);
+
+INSERT INTO Izlozbe(ID, NazivIzlozbe,DatumPocetka,DatumKraja,GalerijaID)
+VALUES (5, "Neoklasizam","2/15/2022","2/28/2022",2);
+
+INSERT INTO Izlozbe(ID, NazivIzlozbe,DatumPocetka,DatumKraja,GalerijaID)
+VALUES (6, "Renesansa","3/10/2022","3/16/2022",2);
+
+
+//DelaIzlozbe
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (1,1,7);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (2,1,8);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (3,1,9);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (4,3,1);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (5,3,2);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (6,3,3);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (7,3,4);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (8,3,5);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (9,3,6);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (10,4,10);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (11,4,11);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (12,4,12);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (13,5,13);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (14,5,14);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (15,5,15);
+
+INSERT INTO DelaIzlozbe(ID,IzlozbaID,UmetnickoDeloID)
+VALUES (16,6,16);
+
+
+
+

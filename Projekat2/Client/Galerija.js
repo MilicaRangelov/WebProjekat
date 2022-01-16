@@ -135,21 +135,26 @@ export class Galerija{
 
         this.crtajBack(this.kontejner);
         let btn = document.querySelector(".Back");
+        let span = document.createElement("span");
         btn.onclick= (ev) => this.crtaj(host);
-        btn.innerHTML = "Go Back";
+        span.innerHTML = "Go Back";
+        btn.appendChild(span);
 
+        let  spoj = document.createElement("div");
+        spoj.className = "spojDiv";
+        this.kontejner.appendChild(spoj);
 
         let konForma = document.createElement("div");
         konForma.className ="KonForma";
-        this.kontejner.appendChild(konForma);
+        spoj.appendChild(konForma);
 
         let konPrikaz = document.createElement("div");
         konPrikaz.className ="KonPrikaz";
-        this.kontejner.appendChild(konPrikaz);
+         spoj.appendChild(konPrikaz);
 
         let konPodIzlozbe = document.createElement("div");
         konPodIzlozbe.className ="PodIzlozbe";
-        this.kontejner.appendChild(konPodIzlozbe);
+        spoj.appendChild(konPodIzlozbe);
 
         this.crtajFormu(konForma);
         this.crtajPrikaz(konPrikaz);
@@ -176,9 +181,13 @@ export class Galerija{
         btn.onclick= (ev) => this.crtaj(host);
         btn.innerHTML = "Go back";
        
+        let  spoj = document.createElement("div");
+        spoj.className = "spojDiv";
+        this.kontejner.appendChild(spoj);
+
         let konDostupen = document.createElement("div");
         konDostupen.className ="KonKarte";
-        this.kontejner.appendChild(konDostupen);
+        spoj.appendChild(konDostupen);
 
         let l = document.createElement("label");
         l.innerHTML="Exibitions: ";
@@ -190,17 +199,18 @@ export class Galerija{
         konDostupen.appendChild(divSe);
 
         let se = document.createElement("select");
+        se.className = "select1";
         divSe.appendChild(se);
         this.PreuzmiIzlozbeGalerije(se);
 
 
         let konKarte = document.createElement("div");
         konKarte.className ="KonKarte";
-        this.kontejner.appendChild(konKarte);
+        spoj.appendChild(konKarte);
 
         let konPrikazKarti = document.createElement("div");
         konPrikazKarti.className ="KonPrikazK";
-        this.kontejner.appendChild(konPrikazKarti);
+        spoj.appendChild(konPrikazKarti);
         this.crtajKarte(konKarte);
 
         this.crtajNext(this.kontejner);
@@ -225,17 +235,21 @@ export class Galerija{
         btn.onclick= (ev) => this.crtaj(host);
         btn.innerHTML = "Go Back";
 
+        let  spoj = document.createElement("div");
+        spoj.className = "spojDiv";
+        this.kontejner.appendChild(spoj);
+
         let div = document.createElement("div");
         div.className = "FormaUmetnika";
-        this.kontejner.appendChild(div);
+        spoj.appendChild(div);
 
         let prikazD = document.createElement("div");
         prikazD.className = "PrikazUmetnika";
-        this.kontejner.appendChild(prikazD);
+        spoj.appendChild(prikazD);
 
         let divPodaci = document.createElement("div");
         divPodaci.className = "PodaciUmetnika";
-        this.kontejner.appendChild(divPodaci);
+        spoj.appendChild(divPodaci);
 
         this.crtajFormaUmetnik();
         this.crtajPrikaz(prikazD);
@@ -387,6 +401,12 @@ export class Galerija{
         pod.className = "Prezime";
         div.appendChild(pod);
 
+        pod = document.createElement("input");
+        pod.type = "number";
+        pod.placeholder = "numberOfCards"
+        pod.className = "NumberCards";
+        div.appendChild(pod);
+
         div = this.crtajDiv(host);
         let div2 = this.crtajDiv(div);
         let rb1 = document.createElement("input");
@@ -404,14 +424,35 @@ export class Galerija{
         let div3 = this.crtajDiv(div);
         let rb2 = document.createElement("input");
         rb2.type="radio";
-        rb2.value = "show";
+        rb2.value = "change";
         rb2.name = "karta";
         div3.appendChild(rb2);
 
         l = document.createElement("label");
-        l.innerHTML = "Show your tickets";
+        l.innerHTML = "Change your tickets";
         l.className = "headerGlavne";
         div3.appendChild(l);
+
+        let divSe = document.createElement("div");
+        //divSe.className = "select";
+        div.appendChild(divSe);
+
+        let se = document.createElement("select");
+        se.className = "select2";
+        divSe.appendChild(se);
+        this.PreuzmiIzlozbeGalerije(se);
+
+        let div5 = this.crtajDiv(div);
+        let rb4 = document.createElement("input");
+        rb4.type="radio";
+        rb4.value = "show";
+        rb4.name = "karta";
+        div5.appendChild(rb4);
+
+        l = document.createElement("label");
+        l.innerHTML = "Show your tickets";
+        l.className = "headerGlavne";
+        div5.appendChild(l);
 
         let div4 = this.crtajDiv(div);
         let rb3 = document.createElement("input");
@@ -458,12 +499,13 @@ export class Galerija{
 
     prikaziInformacijuKarte(){
 
-        let optionEl = this.kontejner.querySelector("select");
+        let optionEl = this.kontejner.querySelector(".select1");
         var izlozbaId = optionEl.options[optionEl.selectedIndex].value;
         let ime = document.querySelector(".Ime").value;
         let prezime = document.querySelector(".Prezime").value;
+        let broj = document.querySelector(".NumberCards").value;
     
-        console.log(`${ime} + ${prezime} + ${izlozbaId}`);
+        console.log(`${ime} + ${prezime} + ${izlozbaId} + ${broj}`);
         var rb = document.querySelector( 'input[name="karta"]:checked');   
     
         console.log(rb.value);
@@ -474,11 +516,18 @@ export class Galerija{
         }
         else if(rb.value === "del"){
            // h2.innerHTML = "Vasa karta uspesno obrisina";
-            this.obrisiKartu(ime,prezime,izlozbaId);
+            this.obrisiKartu(ime,prezime,izlozbaId,broj);
         }
         else if(rb.value === "rez"){
             //h2.innerHTML = "Uspesno ste rezervisali kartu";
-            this.dodajKartu(ime,prezime,izlozbaId);
+            for(let j=0;j<broj;j++)
+                 this.dodajKartu(ime,prezime,izlozbaId,broj);
+        }
+        else if(rb.value === "change"){
+
+            let optionEl2 = this.kontejner.querySelector(".select2");
+            var izlozbaId2 = optionEl2.options[optionEl2.selectedIndex].value;
+             this.izmeniKartu(ime,prezime,izlozbaId,izlozbaId2,broj);
         }
     
     
@@ -642,9 +691,9 @@ export class Galerija{
     }
 
 
-    obrisiKartu(ime,prezime,idIzlozbe){
+    obrisiKartu(ime,prezime,idIzlozbe,broj ){
 
-        fetch("https://localhost:5001/Karte/ObrisiKartuPosetioca/" + ime + "/" + prezime + "/" + idIzlozbe, {
+        fetch("https://localhost:5001/Karte/ObrisiKartuPosetioca/" + ime + "/" + prezime + "/" + idIzlozbe + "/" + broj, {
             method:"DELETE"
         })
         .then(s=>{
@@ -694,6 +743,30 @@ export class Galerija{
 
 
         })
+    }
+
+    izmeniKartu(ime,prezime,izlozbaId,izlozbaId2,broj){
+
+        fetch("https://localhost:5001/Karte/IzmeniKartu/" + ime + "/"+ prezime + "/"+izlozbaId + "/" + izlozbaId2 + "/" + broj, {
+            method: "PUT"
+        })
+        .then(p => {
+
+            if(p.ok){
+
+                p.json().then( karte => {
+
+
+                     var k = new Karte(karte[0].ime, karte[0].prezime, karte[0].izlozba,karte[0].broj);
+                     k.crtaj();
+
+                })
+
+            }
+
+
+        })
+
     }
 
 

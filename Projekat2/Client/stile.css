@@ -8,7 +8,7 @@ body{
     background-image: url("gallery.jpg");
     background-position-y: 20%;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: stretch;
     background-color: blanchedalmond;
     
 }
@@ -22,7 +22,7 @@ th,
 td {
 	padding: 15px;
 	background-color: rgba(255,255,255,0.2);
-	color: #fff;
+	color: rgb(31, 30, 27);
 }
 
 
@@ -48,7 +48,7 @@ td:hover:before{
 
 table {
 
-    width: 800px;
+    width: auto;
 	border-collapse: collapse;
 	overflow: hidden;
 	box-shadow: 0 0 20px rgba(0,0,0,0.1);
@@ -133,7 +133,7 @@ input[type=text] {
     text-decoration: none;
     font-family:"Lucida Console", "Courier New", monospace ;
     display: inline-block;
-    font-size: 16px;
+    font-size: 14px;
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
@@ -154,9 +154,23 @@ input[type=text] {
     align-self: stretch;
     background-color: transparent;
     height: 500px;
-    margin-top: 30px;
+    margin-top: 120px;
+    row-gap: 5px;
 
 
+}
+
+.spojDiv{
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    column-gap: 50px;
+    align-self: stretch;
+
+  
 }
 
 
@@ -207,28 +221,43 @@ input[type=text] {
 
 
 .Back{
+    
+    background-color: #ccc377;
+    border: none;
+    color: rgb(24, 21, 21);
+    text-align: center;
+    font-size: medium;
+    opacity: 0.6;
+    transition: 0.3s;
     display: flex;
     flex-wrap: wrap;
-    align-content: flex-start;
-    background-color: transparent;
-    font-size: small;
-    font-family: "Lucida Console", "Courier New", monospace ;
-    border: none;
-    background-color:  rgba(230, 218, 140, 0.5);
+    text-decoration: none;
+    cursor: pointer;
+    align-self: flex-start;
+    
+
 }
 
+.Back:hover {opacity: 1}
+
 .Next{
+    background-color: #ccc377;
+    border: none;
+    color: rgb(24, 21, 21);
+    text-align: center;
+    font-size: medium;
+    opacity: 0.6;
+    transition: 0.3s;
     display: flex;
     flex-wrap: wrap;
-    align-content: flex-end;
-    background-color: transparent;
-    font-size: small;
-    font-family: "Lucida Console", "Courier New", monospace ;
-    border: none;
-    background-color:  rgba(230, 218, 140, 0.5);
+    text-decoration: none;
+    cursor: pointer;
+    align-self: flex-start;
 }
+.Next:hover {opacity: 1}
 
 .KonPrikaz, .PodIzlozbe{
     background-color:  rgba(230, 218, 140, 0.7);
+   
 }
 
