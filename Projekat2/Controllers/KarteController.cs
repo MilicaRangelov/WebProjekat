@@ -215,6 +215,11 @@ namespace Projekat.Controllers
                 var karta = await Context.Karte.Where(p=> p.Izlozba.ID == idIzlozbe && p.ImePosetioca.Equals(ime) 
                  && p.PrezimePosetioca.Equals(prezime)).ToListAsync();
 
+                int br = karta.Count();
+
+                if(br < broj)
+                    return BadRequest("Nemate toliko karata za brisanje"); 
+
                 int i =0;
                 while(i < broj){
                     Context.Karte.Remove(karta[i]);
@@ -269,7 +274,13 @@ namespace Projekat.Controllers
             try
             {
                 var karte = await Context.Karte.Where(p=> p.ImePosetioca.Equals(imePosetioca) && p.PrezimePosetioca.Equals(prezimePosetioca) && p.Izlozba.ID == idStareIzlozbe).ToListAsync();
+                int br = karte.Count();
                 var izlozba = await Context.Izlozbe.Where(p => p.ID == idNoveIzlozbe).FirstOrDefaultAsync();
+
+                if(broj > br){
+
+                    return BadRequest("Prevelik broj karata za izmenu");
+                }
         
                 if(karte != null && izlozba != null )
                 {
