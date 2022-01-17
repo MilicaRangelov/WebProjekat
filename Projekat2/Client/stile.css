@@ -224,10 +224,10 @@ input[type=text] {
     
     background-color: #ccc377;
     border: none;
-    color: rgb(24, 21, 21);
+    color: rgb(0, 0, 0);
     text-align: center;
     font-size: medium;
-    opacity: 0.6;
+    opacity: 1;
     transition: 0.3s;
     display: flex;
     flex-wrap: wrap;
@@ -235,10 +235,11 @@ input[type=text] {
     cursor: pointer;
     align-self: flex-start;
     
+    
 
 }
 
-.Back:hover {opacity: 1}
+.Back:hover {background-color: #8f7919;}
 
 .Next{
     background-color: #ccc377;
@@ -246,7 +247,7 @@ input[type=text] {
     color: rgb(24, 21, 21);
     text-align: center;
     font-size: medium;
-    opacity: 0.6;
+    opacity: 1;
     transition: 0.3s;
     display: flex;
     flex-wrap: wrap;
@@ -254,7 +255,7 @@ input[type=text] {
     cursor: pointer;
     align-self: flex-start;
 }
-.Next:hover {opacity: 1}
+.Next:hover {background-color: #8f7919;}
 
 .KonPrikaz, .PodIzlozbe{
     background-color:  rgba(230, 218, 140, 0.7);

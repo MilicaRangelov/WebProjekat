@@ -48,6 +48,9 @@ namespace Projekat.Controllers
             if(idUmetnika <= 0)
                 return BadRequest("Ne postoji umetnik sa zadatim id-jem");
 
+             if(idGalerije <= 0)
+                return BadRequest("Ne postoji galerija sa zadatim id-jem");
+
             try
             {
                 return Ok( await Context.UmetnickaDela.Where(q => q.Umetnik.ID == idUmetnika && q.Galerija.ID == idGalerije)

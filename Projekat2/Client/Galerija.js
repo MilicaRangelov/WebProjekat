@@ -403,6 +403,8 @@ export class Galerija{
 
         pod = document.createElement("input");
         pod.type = "number";
+        pod.min = "0";
+        pod.max = "5";
         pod.placeholder = "numberOfCards"
         pod.className = "NumberCards";
         div.appendChild(pod);
@@ -520,8 +522,14 @@ export class Galerija{
         }
         else if(rb.value === "rez"){
             //h2.innerHTML = "Uspesno ste rezervisali kartu";
-            for(let j=0;j<broj;j++)
-                 this.dodajKartu(ime,prezime,izlozbaId,broj);
+            if(broj < 0)
+            {
+                alert("Broj karata nije validan");
+            }
+            else{
+                for(let j=0;j<broj;j++)
+                    this.dodajKartu(ime,prezime,izlozbaId,broj);
+            }
         }
         else if(rb.value === "change"){
 
@@ -605,16 +613,22 @@ export class Galerija{
             method: "GET"
         })
         .then(p=>{
-            p.json().then(izlozbe =>{
+            if(p.ok){
+                p.json().then(izlozbe =>{
 
-                izlozbe.forEach(el => {
+                    izlozbe.forEach(el => {
 
-                    var izl = new Izlozba(el.id, el.naslov, el.datumPocetka, el.datumKraja, el.brojKarata);
-                    izl.crtaj(); 
+                        var izl = new Izlozba(el.id, el.naslov, el.datumPocetka, el.datumKraja, el.brojKarata);
+                        izl.crtaj(); 
 
+                    })
+                
                 })
-             
-            })
+        }
+        else{
+
+            alert("Uneti podaci nisu validni");
+        }
         })
 
     }
@@ -648,6 +662,10 @@ export class Galerija{
 
                     
                 })
+            }
+            else{
+
+                alert("Uneti podaci nisu validni");
             }
         })
 
@@ -685,6 +703,10 @@ export class Galerija{
 
                 })
             }
+            else{
+
+                alert("Uneti podaci nisu validni");
+            }
 
 
         })
@@ -718,6 +740,10 @@ export class Galerija{
                     }
                 })
             }
+            else{
+
+                alert("Uneti podaci nisu validni");
+            }
 
 
         })
@@ -739,6 +765,10 @@ export class Galerija{
                     k.crtaj();
 
                 })
+            }
+            else{
+
+                alert("Uneti podaci nisu validni");
             }
 
 
@@ -762,6 +792,10 @@ export class Galerija{
 
                 })
 
+            }
+            else{
+
+                alert("Uneti podaci nisu validni");
             }
 
 
@@ -790,6 +824,10 @@ export class Galerija{
                         host.appendChild(op);
                     })
                 })
+            }
+            else{
+
+                alert("Uneti podaci nisu validni");
             }
         })
     }
@@ -834,6 +872,10 @@ export class Galerija{
 
 
             }
+            else{
+
+                alert("Uneti podaci nisu validni");
+            }
         })
 
     }
@@ -855,6 +897,10 @@ export class Galerija{
                         um.crtaj();
                     })
                 })
+            }
+            else{
+
+                alert("Uneti podaci nisu validni");
             }
         })
 

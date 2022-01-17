@@ -76,11 +76,11 @@ namespace Projekat.Controllers
             if(idIzlozbe <= 0)
                 return BadRequest("Ne postoji trazena izlozba");
 
-            if(imePosetioca == null){
+            if(string.IsNullOrEmpty(imePosetioca) && imePosetioca.Length > 20){
                 return BadRequest("Morate uneti ime posetioca");
             }    
 
-            if(prezimePosetioca == null){
+            if(string.IsNullOrEmpty(prezimePosetioca) && prezimePosetioca.Length > 20){
 
                 return BadRequest("Morate uneti ime posetioca");
             }   
@@ -195,14 +195,20 @@ namespace Projekat.Controllers
         [HttpDelete]
         public async Task<ActionResult> ObrisiKartuPosetioca(string ime, string prezime, int idIzlozbe,int broj)
         {
-            if(idIzlozbe <= 0)
+            if(idIzlozbe <= 0 )
                 return BadRequest("Broj mora biti veci od 0");
 
             if(string.IsNullOrEmpty(ime) || string.IsNullOrEmpty(prezime))
                 return BadRequest("Prazan string");
 
+            if(prezime.Length > 20|| ime.Length > 20)
+                return BadRequest("Predugacak string");  
+                
+             if(broj < 0){
 
-            
+                return BadRequest("Nije validan broj karata");
+            }      
+
             try
             {
                 var izlozba = await Context.Izlozbe.Where(p=>p.ID == idIzlozbe).FirstOrDefaultAsync();
@@ -255,6 +261,10 @@ namespace Projekat.Controllers
             if(idStareIzlozbe <= 0 || idNoveIzlozbe < 0)
             {
                 return BadRequest("Pogresna id izlozbe");
+            }
+            if(broj < 0){
+
+                return BadRequest("Nije validan broj karata");
             }
             try
             {
