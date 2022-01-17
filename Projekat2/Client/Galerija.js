@@ -404,7 +404,7 @@ export class Galerija{
         pod = document.createElement("input");
         pod.type = "number";
         pod.min = "0";
-        pod.max = "5";
+        pod.max = "20";
         pod.placeholder = "numberOfCards"
         pod.className = "NumberCards";
         div.appendChild(pod);
